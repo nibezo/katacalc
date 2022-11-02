@@ -1,13 +1,18 @@
-document.addEventListener("DOMContentLoaded", calculator);
-
 function calculator(string) {
-    firstOperand = string[0]
-    secondOperand = string[4]
-    console.log(string)
-    console.log(firstOperand)
-    console.log(secondOperand)
-    return firstOperand + secondOperand
+    if (string[0] > 0) {  
+      firstOperand = parseInt(string.slice(0, string.indexOf(' ')))
+      secondOperand = parseInt(string.slice(string.indexOf(' ') + 3))
+      if (string[string.indexOf(' ') + 1] === '+')  {
+        return String(firstOperand + secondOperand)
+      } else if (string[string.indexOf(' ') + 1] === '-') {
+        return String(firstOperand - secondOperand)
+      } else if (string[string.indexOf(' ') + 1] === '*') {
+        return String(firstOperand * secondOperand)
+      } else if (string[string.indexOf(' ') + 1] === '/') {
+        return String(parseInt(firstOperand / secondOperand))
+      }
+      } else {
+      console.log('Это не десятичное!')
+    }
   }
-  
-  
   module.exports = calculator; // Не трогайте эту строчку
