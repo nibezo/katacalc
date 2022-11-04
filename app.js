@@ -13,12 +13,32 @@ function calculator(string) {
     else if (operator === '*') { return String(+firstOperand * +secondOperand)} 
     else if (operator === '/') { return String(parseInt(firstOperand / secondOperand))}
     } else if (roman.test(string)) {
+      console.log(roman.test(string))
     // Здесь решение для выражений с римскими числами
       firstOperand = romanToArabic(firstOperand)
       secondOperand = romanToArabic(secondOperand)
-      if (operator === '+') {return String(+firstOperand + +secondOperand)}
-  } else {
-    throw new UserException("Некорректный ввод данных");    
+      // console.log(firstOperand)
+      // console.log(typeof(firstOperand))
+      // console.log(secondOperand)
+      // console.log(typeof(secondOperand))
+      if (operator === '+') {
+        console.log(String(arabicToRoman(firstOperand)) + " " + String(operator) +  " " + String(arabicToRoman(secondOperand)));
+        console.log(String(arabicToRoman(firstOperand)) + String(arabicToRoman(secondOperand)))
+        
+        return arabicToRoman(firstOperand+secondOperand)
+      } else if (operator === '-') {
+        return arabicToRoman(firstOperand-secondOperand)
+      } else if (operator === '/') {
+        return arabicToRoman(parseInt(firstOperand/secondOperand))
+      } else if (operator === '*') {
+        return arabicToRoman(firstOperand*secondOperand)
+      };
+      // if (operator === '+') {
+      //   return arabicToRoman(firstOperand + secondOperand);
+      // };
+    } else if (roman.test(string) === false) {
+      // console.log(string)
+      throw ("Некорректный ввод данных");    
   }
 }
 
@@ -53,6 +73,19 @@ function romanToArabic(romanNum) {
     }
   }
   return result
+}
+
+function arabicToRoman(arabic) {
+  let values = {C: 100, XC: 90, L: 50, XL: 40, X: 10, IX: 9, V: 5, IV: 4, I: 1 },
+    roman = '',
+    i;
+  for (i in values) {
+    while (arabic >= values[i]) {
+      roman += i;
+      arabic -= values[i];
+    }
+  }
+  return roman;
 }
 
 module.exports = calculator; // Не трогайте эту строчку
